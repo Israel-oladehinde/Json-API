@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>js</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<!-- 
+    <center>
+        <div id="preloader"></div>
+    </center> -->
+    <div id="cards-container">
+    </div>
+
+    <script>
+        
+        fetch("https://dummyapi.io/data/v1/user", { method: "GET", headers: { 'app-id': "64fb0148ef48e7299dab3369" } })
+            // fetch('https://jsonplaceholder.typicode.com/users')
+            .then((response) => response.json())
+            .then((response) => {
+                renderDatas(response)
+            })
+            // .then(document.getElementById("preloader").style.display = "none");
+        const cardsContainer = document.querySelector('#cards-container');
+
+        function renderDatas(data) {
+            data.data.forEach(response => {
+                const el = document.createElement("div");
+                el.innerHTML = `
+    <div class="card">
+        <img src="${response.picture}" alt="" srcset="">
+        <h2>${response.firstName}</h2>
+        <h3>${response.lastName}</h3>
+        <h3>${response.id}</h3>
+    </div>
+    `;
+                cardsContainer.appendChild(el);
+            });
+        };
+    </script>
+</body>
+
+</html>
